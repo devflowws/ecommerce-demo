@@ -1,26 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import { Leaf, Users, Sparkle } from "lucide-react";
 import { Container } from "./container";
+import { useLanguage } from "@/lib/i18n/language-context";
 
-const VALUES = [
-  {
-    icon: Leaf,
-    title: "Matières locales",
-    description: "Wax, raphia et cuir sourcés auprès de fournisseurs togolais.",
-  },
-  {
-    icon: Users,
-    title: "Ateliers partenaires",
-    description: "Chaque pièce est confectionnée par des artisans de Lomé, rémunérés au juste prix.",
-  },
-  {
-    icon: Sparkle,
-    title: "Petites séries",
-    description: "Pas de surproduction : des collections limitées, pensées pour durer.",
-  },
-];
+const VALUE_ICONS = [Leaf, Users, Sparkle];
+const VALUE_KEYS = ["local", "workshops", "smallBatch"];
 
 export function VisionSection() {
+  const { t } = useLanguage();
+
+  const values = VALUE_KEYS.map((key, i) => ({
+    icon: VALUE_ICONS[i],
+    title: t(`vision.values.${key}.title`),
+    description: t(`vision.values.${key}.description`),
+  }));
+
   return (
     <section id="vision" className="bg-sand-50 py-24">
       <Container>
@@ -37,21 +33,17 @@ export function VisionSection() {
 
           <div className="order-1 lg:order-2">
             <span className="text-sm font-semibold uppercase tracking-wider text-clay-600">
-              Notre histoire
+              {t("vision.eyebrow")}
             </span>
             <h2 className="mt-3 font-[family-name:var(--font-serif-display)] text-4xl text-ink-950 sm:text-5xl">
-              Le wax mérite mieux qu&apos;un rayon de supermarché.
+              {t("vision.title")}
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-ink-600">
-              AMA est née à Lomé d&apos;une conviction simple : les tissus et
-              savoir-faire togolais méritent d&apos;être portés fièrement,
-              pas seulement exportés. Nous travaillons avec une poignée
-              d&apos;ateliers locaux, en petites séries, pour que chaque
-              pièce garde son caractère.
+              {t("vision.body")}
             </p>
 
             <ul className="mt-8 space-y-6">
-              {VALUES.map(({ icon: Icon, title, description }) => (
+              {values.map(({ icon: Icon, title, description }) => (
                 <li key={title} className="flex gap-4">
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-clay-500/10 text-clay-600">
                     <Icon size={20} />

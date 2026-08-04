@@ -5,10 +5,13 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function CartDrawer() {
   const { items, subtotal, isOpen, closeCart, setQuantity, removeItem } =
     useCart();
+  const { t, locale } = useLanguage();
+  const fmt = (n: number) => n.toLocaleString(locale === "fr" ? "fr-FR" : "en-US");
 
   return (
     <AnimatePresence>
@@ -31,13 +34,13 @@ export function CartDrawer() {
             <div className="flex items-center justify-between border-b border-ink-900/10 px-6 py-5">
               <h2 className="flex items-center gap-2 font-[family-name:var(--font-serif-display)] text-2xl text-ink-900">
                 <ShoppingBag size={20} />
-                Votre panier
+                {t("cart.title")}
               </h2>
               <button
                 type="button"
                 onClick={closeCart}
                 className="grid h-9 w-9 place-items-center rounded-full text-ink-600 hover:bg-ink-900/5"
-                aria-label="Fermer"
+                aria-label="Close"
               >
                 <X size={18} />
               </button>
@@ -46,7 +49,7 @@ export function CartDrawer() {
             <div className="flex-1 overflow-y-auto px-6 py-5">
               {items.length === 0 ? (
                 <p className="mt-10 text-center text-sm text-ink-400">
-                  Votre panier est vide pour l&apos;instant.
+                  {t("cart.empty")}
                 </p>
               ) : (
                 <ul className="space-y-5">
@@ -55,7 +58,7 @@ export function CartDrawer() {
                       <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-sand-200">
                         <Image
                           src={product.image}
-                          alt={product.name}
+                          alt={t(`products.items.${product.id}.name`)}
                           fill
                           sizes="80px"
                           className="object-cover"
@@ -63,10 +66,10 @@ export function CartDrawer() {
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-semibold text-ink-900">
-                          {product.name}
+                          {t(`products.items.${product.id}.name`)}
                         </p>
                         <p className="text-xs text-ink-400">
-                          {product.price.toLocaleString("fr-FR")} FCFA
+                          {fmt(product.price)} FCFA
                         </p>
                         <div className="mt-2 flex items-center gap-2">
                           <button
@@ -94,7 +97,7 @@ export function CartDrawer() {
                             type="button"
                             onClick={() => removeItem(product.id)}
                             className="ml-auto text-ink-300 hover:text-clay-600"
-                            aria-label="Retirer"
+                            aria-label="Remove"
                           >
                             <Trash2 size={15} />
                           </button>
@@ -109,18 +112,18 @@ export function CartDrawer() {
             {items.length > 0 && (
               <div className="border-t border-ink-900/10 px-6 py-5">
                 <div className="flex items-center justify-between text-base font-semibold text-ink-900">
-                  <span>Sous-total</span>
-                  <span>{subtotal.toLocaleString("fr-FR")} FCFA</span>
+                  <span>{t("cart.subtotal")}</span>
+                  <span>{fmt(subtotal)} FCFA</span>
                 </div>
                 <p className="mt-1 text-xs text-ink-400">
-                  Livraison calculée à l&apos;étape suivante.
+                  {t("cart.shippingNote")}
                 </p>
                 <Link
                   href="/checkout"
                   onClick={closeCart}
                   className="mt-4 flex w-full items-center justify-center rounded-full bg-clay-500 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-clay-600"
                 >
-                  Passer commande
+                  {t("cart.checkout")}
                 </Link>
               </div>
             )}

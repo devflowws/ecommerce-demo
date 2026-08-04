@@ -196,6 +196,9 @@ export const translations = {
       emptyCart: "Your cart is empty.",
       backToShop: "Back to shop",
       redirecting: "Redirecting to secure checkout…",
+      error: "Something went wrong starting checkout. Please try again.",
+      reference: "Reference",
+      orderConfirmed: "Your order is confirmed!",
     },
     languageToggle: {
       label: "Language",
@@ -398,6 +401,9 @@ export const translations = {
       emptyCart: "Votre panier est vide.",
       backToShop: "Retour à la boutique",
       redirecting: "Redirection vers le paiement sécurisé…",
+      error: "Une erreur est survenue au démarrage du paiement. Réessayez.",
+      reference: "Référence",
+      orderConfirmed: "Votre commande est confirmée !",
     },
     languageToggle: {
       label: "Langue",

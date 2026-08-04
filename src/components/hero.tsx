@@ -4,8 +4,11 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Container } from "./container";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section id="accueil" className="relative overflow-hidden bg-sand-100">
       <div className="pointer-events-none absolute inset-0">
@@ -22,7 +25,7 @@ export function Hero() {
             className="inline-flex items-center gap-2 rounded-full border border-clay-500/20 bg-clay-500/10 px-4 py-1.5 text-sm font-medium text-clay-700"
           >
             <Sparkles size={14} />
-            Fait à Lomé, porté partout
+            {t("hero.badge")}
           </motion.div>
 
           <motion.h1
@@ -31,9 +34,9 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.05 }}
             className="mt-6 font-[family-name:var(--font-serif-display)] text-5xl leading-[1.05] text-ink-950 sm:text-6xl"
           >
-            Le wax, réinventé
+            {t("hero.title1")}
             <br />
-            <span className="text-clay-600">pour votre quotidien.</span>
+            <span className="text-clay-600">{t("hero.title2")}</span>
           </motion.h1>
 
           <motion.p
@@ -42,9 +45,7 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mt-6 max-w-lg text-lg leading-relaxed text-ink-600"
           >
-            Robes, tissus et accessoires façonnés par des artisans togolais.
-            Livrés à Lomé, payables en Mobile Money, sans compromis sur la
-            qualité.
+            {t("hero.subtitle")}
           </motion.p>
 
           <motion.div
@@ -57,7 +58,7 @@ export function Hero() {
               href="#produits"
               className="group inline-flex items-center justify-center gap-2 rounded-full bg-ink-900 px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-ink-900/20 transition-all hover:bg-ink-800"
             >
-              Découvrir la collection
+              {t("hero.ctaPrimary")}
               <ArrowRight
                 size={18}
                 className="transition-transform group-hover:translate-x-1"
@@ -67,7 +68,7 @@ export function Hero() {
               href="#vision"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-ink-900/15 px-7 py-3.5 text-base font-semibold text-ink-900 transition-colors hover:bg-ink-900/5"
             >
-              Notre histoire
+              {t("hero.ctaSecondary")}
             </a>
           </motion.div>
         </div>
@@ -89,9 +90,9 @@ export function Hero() {
           <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl bg-sand-50/95 px-4 py-3 shadow-lg backdrop-blur">
             <div>
               <p className="text-sm font-semibold text-ink-900">
-                Ensemble Adja
+                {t("hero.productBadgeName")}
               </p>
-              <p className="text-xs text-ink-400">Best-seller ce mois-ci</p>
+              <p className="text-xs text-ink-400">{t("hero.productBadgeCaption")}</p>
             </div>
             <span className="font-[family-name:var(--font-serif-display)] text-lg text-clay-600">
               24 500 F

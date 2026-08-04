@@ -1,14 +1,19 @@
+"use client";
+
 import { Truck, Smartphone, RotateCcw, HandHeart } from "lucide-react";
 import { Container } from "./container";
-
-const POINTS = [
-  { icon: Truck, label: "Livraison à Lomé sous 48h" },
-  { icon: Smartphone, label: "Paiement Mobile Money" },
-  { icon: RotateCcw, label: "Retours faciles sous 7 jours" },
-  { icon: HandHeart, label: "Fait par des artisans locaux" },
-];
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export function TrustBar() {
+  const { t } = useLanguage();
+
+  const POINTS = [
+    { icon: Truck, label: t("trustBar.delivery") },
+    { icon: Smartphone, label: t("trustBar.mobileMoney") },
+    { icon: RotateCcw, label: t("trustBar.returns") },
+    { icon: HandHeart, label: t("trustBar.handmade") },
+  ];
+
   return (
     <section className="border-y border-ink-900/5 bg-sand-50 py-8">
       <Container>
